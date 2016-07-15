@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SocketPhoto</string>
+
+    <string name="app_switch">切换摄像头</string>
+</resources>
