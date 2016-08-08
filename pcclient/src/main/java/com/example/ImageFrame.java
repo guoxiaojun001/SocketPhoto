@@ -2,6 +2,8 @@ package com.example;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.ServerSocket;
 
 import javax.swing.JButton;
@@ -14,7 +16,8 @@ import javax.swing.JFrame;
 public class ImageFrame extends JFrame{
 
     public ImagePanel panel;
-    public JButton jb;
+    public JButton jb;//截图
+    public JButton switchCamera;//切换摄像头
 
     public ImageFrame(ServerSocket sSocket) {
         // get screen dimensions
@@ -38,10 +41,22 @@ public class ImageFrame extends JFrame{
         panel.setLocation(0, 0);
         add(panel);
         jb = new JButton("Catch Photo");
-        jb.setBounds(0, 480, 640, 50);
+        jb.setBounds(0, 480, 100, 50);
+
         add(jb);
 
+        switchCamera = new JButton("switchCamera");
+        switchCamera.setBounds(100, 480, 100, 50);
+
+        add(switchCamera);
+
         jb.addActionListener(new SavePhotoListener(sSocket));//保存图片
+        switchCamera.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel.switchCamera();
+            }
+        });
     }
 
     public static final int DEFAULT_WIDTH = 640;
